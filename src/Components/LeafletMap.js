@@ -28,14 +28,28 @@ export default function LeafletMap(){
             marker.bindPopup("I am a marker.")
 
             // Click on map, see what event data is called
-            map.on("click",(e)=>{
-                console.log(e)
+            // map.on("click",(e)=>{
+            //     console.log(e)
+            // })
+            let geoJ = L.geoJSON().addTo(map)
+            getGeoJson("https://data.calgary.ca/resource/fwyk-8pth.geojson").then(data=>{
+                geoJ.addData(data)
             })
-
 
         }
     }, []);
-
+    const getGeoJson=async (link)=>{
+        return await fetch(link).then(res=>{
+            if(res.ok){
+                return res.json()
+            }
+            throw new Error("Status "+res.status)
+        }).then(data=>{
+            return data;
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
 
     return(
         <div id={"map"} style={{height:"900px",width:"600px",backgroundColor:"red"}} ref={mapRef}></div>
