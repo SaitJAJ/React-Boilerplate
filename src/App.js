@@ -1,4 +1,5 @@
 import {useEffect, useRef, useState} from "react";
+import LeafletMap from "./Components/LeafletMap";
 
 function App(){
 
@@ -6,28 +7,7 @@ function App(){
 
     return(
         <div>
-            Hello World
-            <br/>
-            <BoolTest/>
+            <LeafletMap/>
         </div>
     )
 }export default App;
-
-export function BoolTest() {
-    const [bool, setBool] = useState(false)
-    const [diffBool, setDiffBool] = useState(false)
-    const boolRef = useRef();
-    console.log("booltest")
-
-
-    return (
-        <>
-            {bool ? "True" : "False"}
-            <br/>
-            <input type={"button"} onClick={() => {
-                setBool(!bool)
-            }}/>
-            <input type={"text"} ref={boolRef}/>
-        </>
-    )
-}
